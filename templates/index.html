@@ -1,0 +1,15 @@
+{%extends 'base.html'%}
+{% block body %}
+<div class="container">
+    <h1 style="text-align: center;">Generate TestCase</h1>
+    <div class="col">
+        <a href="{%url 'gen1d'%}" class="btn  btn-outline-info btn-lg btn-block">1D array</a>
+        <a href="{%url 'gen2d'%}" class="btn  btn-outline-info btn-lg btn-block">2D array</a>
+        <a href="{%url 'tree'%}" class="btn  btn-outline-info btn-lg btn-block">Tree</a>
+        <a href="{%url 'graph'%}" class="btn  btn-outline-info btn-lg btn-block">Graph</a>
+        <a href="{%url 'string'%}" class="btn  btn-outline-info btn-lg btn-block">String</a>
+        <a href="{%url 'bigint'%}" class="btn  btn-outline-info btn-lg btn-block">BigInt Calculator</a>
+
+    </div>
+</div>
+{%endblock%}

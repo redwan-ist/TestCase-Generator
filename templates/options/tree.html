@@ -1,0 +1,71 @@
+{%extends 'base.html'%}
+{% block body %}
+
+<div class="container" style="padding-bottom: 100px;">
+    <div class="alert alert-primary">
+        <h2 style="text-align: center;">Generate Tree</h2>
+        <h5 style="text-align: center;">For Visual Representation Try: <a href="https://csacademy.com/app/graph_editor/"
+                target="_blank">CSACADEMY</a></h5>
+    </div>
+    <div class="row">
+        <div class="col-sm-4 mt-5">
+            <form action="tree" method="post">
+                {%csrf_token%}
+
+                <div class="form-row mt-2">
+                    <input type="text" class="form-control" placeholder="Number Of Node" name="node" required>
+                </div><br>
+
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" name="wg" value="wg" id="wg" onclick="Weight()">
+                    <label class="form-check-label" for="unique">Weighted Tree</label>
+                </div>
+                <br><br>
+                <div class="form-row mt-2" id='weight' style="display: none;">
+                    <div class="form-row mt-2">
+                        <input type="text" class="form-control" placeholder="Minimum Weight" name="min" id="min">
+                    </div>
+                    <div class="form-row mt-2">
+                        <input type="text" class="form-control" placeholder="Maximum Weight" name="max" id="max">
+                    </div><br>
+                </div><br>
+                <button type="submit mt-2" class="btn btn-primary">Generate</button>
+            </form>
+
+        </div>
+        <div class="col-sm-8">
+            <button class="btn btn-dark" style="float: right;" onclick=" copy()">Copy</button>
+            <form class="h-100 w-100">
+                <textarea id="output" style="overflow: scroll; width: 100%; height: 100%; margin: 0px;"></textarea>
+            </form>
+
+        </div>
+    </div>
+</div>
+<script>
+    function copy() {
+        let textarea = document.getElementById("output");
+        textarea.select();
+        document.execCommand("copy");
+    }
+    function Weight() {
+        if (document.getElementById("wg").checked) {
+            document.getElementById("weight").style.display = 'block';
+            document.getElementById("min").setAttribute("required", "");
+            document.getElementById("max").setAttribute("required", "");
+        }
+        else {
+            document.getElementById("min").removeAttribute("required");
+            document.getElementById("max").removeAttribute("required");
+            document.getElementById("weight").style.display = 'none';
+        }
+    }
+
+
+    var text = "{{ data|linebreaksbr}}";
+    text = text.replace(/<br>/gi, '\n');
+    console.log(text);
+    document.getElementById("output").innerHTML += text;
+
+</script>
+{%endblock%}
